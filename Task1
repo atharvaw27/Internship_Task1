@@ -1,0 +1,33 @@
+import requests
+import matplotlib.pyplot as plt
+import pandas as pd
+
+url = "https://restcountries.com/v3.1/all"
+
+try:
+    response = requests.get(url)
+    response.raise_for_status()  
+    data = response.json()
+    
+    countries = []
+    populations = []
+
+    for country in data:
+        countries.append(country.get('name', {}).get('common', 'Unknown'))
+        populations.append(country.get('population', 0))
+
+    df = pd.DataFrame({'Country': countries, 'Population': populations})
+    top_countries = df.sort_values(by='Population', ascending=False).head(10)
+
+    plt.figure(figsize=(10, 6))
+    plt.bar(top_countries['Country'], top_countries['Population'], color='green')
+    plt.title("Top 10 Countries by Population")
+    plt.xlabel("Country")
+    plt.ylabel("Population")
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
+    
+
+except requests.exceptions.RequestException as e:
+    print("Error fetching data:", e)
