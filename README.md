@@ -40,3 +40,6 @@ Catches and reports any exceptions during the API request using a try-except blo
 
 The bar chart includes labels, title, and rotated x-axis labels for readability.
 
+![Screenshot 2025-01-04 153859](https://github.com/user-attachments/assets/3cb79de7-a4df-441a-a4b0-597b1fc0d808)
+
+
